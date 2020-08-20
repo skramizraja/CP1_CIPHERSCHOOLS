@@ -1,0 +1,92 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int count1=0;
+        int count2=0;
+        ListNode *temp1=headA;
+        ListNode *temp2=headB;
+        
+        while(temp1!=NULL)
+        {
+            count1++;
+            temp1=temp1->next;
+        }
+        while(temp2!=NULL)
+        {
+            count2++;
+            temp2=temp2->next;
+        }
+        if(temp1!=temp2)
+            return NULL;
+        ListNode *temp3=headA;
+        ListNode *temp4=headB;
+        bool flag=false;
+        
+        if(count1==count2)
+        {
+           while(temp3!=NULL)
+          {
+             if(temp3==temp4)
+             {
+                flag=true; 
+                 break;
+             }
+            temp3=temp3->next;
+            temp4=temp4->next;
+           }
+            
+          
+        }
+        else if(count1>count2)
+        {
+            int x=abs(count1-count2);
+             while(x--)
+                 temp3=temp3->next;
+           
+             while(temp3!=NULL)
+          {
+             if(temp3==temp4)
+             {
+                flag=true;
+                 break;
+            }
+            temp3=temp3->next;
+            temp4=temp4->next;
+         }
+            
+            }
+        else if(count1<count2)
+        {
+            int x=abs(count1-count2);
+             while(x--)
+                 temp4=temp4->next;
+           
+             while(temp4!=NULL)
+          {
+             if(temp3==temp4)
+             {
+                flag=true;
+                 break;
+            }
+            temp3=temp3->next;
+            temp4=temp4->next;
+         }
+          
+        }
+        
+        if (flag==true)
+            return temp3;
+        else
+            return 0;
+        
+        
+    }
+};
