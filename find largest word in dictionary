@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool ispresent(string &word, string &str)
+{
+    int j=0;
+    for (int i=0; i<str.length() && j<str.length();i++)
+    {// cout<<word[j]<<" ";
+        if(word[j]==str[i])
+          j++;
+    }
+  //  cout<<j<<" ";
+
+    if(j==word.length())
+    {  //cout<<"true";
+    return true;
+    }
+    else
+    {//cout<<"false";
+       return false;
+    }
+
+}
+
+string largest_word(vector<string> &s, string &str)
+{
+    int length=0;
+    string temp1="";
+    for (string word : s)
+    { //cout<<word<<" ";
+        while(length<word.length() && ispresent(word,str))
+        {
+            length=word.length();
+            temp1=word;
+
+        }
+    }
+    return temp1;
+}
+
+int main() {
+    int T;
+    cin>>T;
+    while(T--)
+    {
+        int N;
+        cin>>N;
+        vector<string> s;
+        for (int i=0;i<N;i++)
+        {
+           string temp="";
+           cin>>temp;
+           s.push_back(temp);
+        }
+        string str;
+        cin>>str;
+        string result="";
+        result=largest_word(s,str);
+        cout<<result<<"\n";
+
+
+    }
+
+
+	return 0;
+}
